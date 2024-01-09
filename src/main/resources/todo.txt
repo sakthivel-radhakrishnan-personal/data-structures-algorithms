@@ -1,0 +1,4 @@
+Java Custom Comparator - Refer MaxValueOfLoot.java & MaximumSalary.java
+Revisit BinarySearchWithDuplicates (Can be optimised: https://cogniterra.org/lesson/28355/step/3?unit=20628)
+https://www.enjoyalgorithms.com/blog/find-the-majority-element-in-an-array
+Coin change DP - Optimise space from 2D to 1D array
