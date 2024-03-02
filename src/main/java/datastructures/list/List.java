@@ -14,4 +14,6 @@ public interface List<T> {
     void add(int index, T element);
 
     Object get(int index);
+
+    boolean contains(T o);
 }
