@@ -136,6 +136,18 @@ public class LinkedList<T> implements List<T> {
     }
 
     @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    @Override
+    public void clear() {
+        head = null;
+        tail = null;
+        size = 0;
+    }
+
+    @Override
     public boolean contains(Object o) {
         Node current = head;
         while (current != null) {

@@ -3,17 +3,22 @@ package datastructures.list;
 import exception.EmptyListException;
 
 public interface List<T> {
-    int size();
 
     void add(T data);
 
-    void remove(T element) throws EmptyListException;
+    void add(int index, T element);
 
     void remove(int index);
 
-    void add(int index, T element);
+    void remove(T element) throws EmptyListException;
 
     Object get(int index);
 
     boolean contains(T o);
+
+    int size();
+
+    boolean isEmpty();
+
+    void clear();
 }

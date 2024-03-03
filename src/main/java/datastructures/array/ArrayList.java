@@ -1,9 +1,11 @@
 package datastructures.array;
 
+import datastructures.list.List;
+
 import java.util.Arrays;
 import java.util.Objects;
 
-public class ArrayList<T> {
+public class ArrayList<T> implements List<T> {
     private Object[] list;
 
     private int size;
@@ -21,10 +23,12 @@ public class ArrayList<T> {
         size = 0;
     }
 
+    @Override
     public int size() {
         return size;
     }
 
+    @Override
     public void add(T element) {
         if (list.length == size) {
             increaseListCapacity();
@@ -37,6 +41,7 @@ public class ArrayList<T> {
         specified element from this list,
         if it is present
      */
+    @Override
     public void remove(Object element) {
         for (int i = 0; i < list.length; i++) {
             if (list[i] == element) {
@@ -47,22 +52,26 @@ public class ArrayList<T> {
         }
     }
 
+    @Override
     public void remove(int index) throws ArrayIndexOutOfBoundsException {
         validateIndexRange(index);
         list[index] = null;
         decrementListSize();
     }
 
+    @Override
     public void add(int index, T element) throws ArrayIndexOutOfBoundsException {
         validateIndexRange(index);
         list[index] = element;
     }
 
+    @Override
     public Object get(int index) throws ArrayIndexOutOfBoundsException {
         validateIndexRange(index);
         return list[index];
     }
 
+    @Override
     public boolean contains(Object o) {
         for (Object object : list) {
             if (Objects.equals(o, object)) {
@@ -72,8 +81,15 @@ public class ArrayList<T> {
         return false;
     }
 
+    @Override
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    @Override
+    public void clear() {
+        list = new Object[DEFAULT_CAPACITY];
+        size = 0;
     }
 
     private void increaseListCapacity() {
@@ -96,10 +112,5 @@ public class ArrayList<T> {
         if (index < 0 || index >= list.length) {
             throw new ArrayIndexOutOfBoundsException(INDEX_OUT_OF_RANGE_ERR_MSG);
         }
-    }
-
-    public void clear() {
-        list = new Object[DEFAULT_CAPACITY];
-        size = 0;
     }
 }

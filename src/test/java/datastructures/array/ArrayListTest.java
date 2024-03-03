@@ -19,15 +19,15 @@ class ArrayListTest {
         }
     }
 
-//    @Test
-//    void testRemove() {
-//        ArrayList<Integer> list = new ArrayList<>();
-//        for (int i = 0; i < 10_000_000; i++) {
-//            list.add(i);
-//        }
-//        list.remove(0);
-//        assertEquals(9_999_999, list.size());
-//    }
+    @Test
+    void testRemove() {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < 10_000_000; i++) {
+            list.add(i);
+        }
+        list.remove(Integer.valueOf(0));
+        assertEquals(9_999_999, list.size());
+    }
 
     @Test
     void testAddAtIndex() {

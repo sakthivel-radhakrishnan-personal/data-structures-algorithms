@@ -273,4 +273,23 @@ class LinkedListTest {
         assertTrue(list.contains(4));
         assertFalse(list.contains(5));
     }
+
+    @Test
+    void testClear() {
+        List<Integer> list = new LinkedList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+
+        assertEquals(4, list.size());
+        list.clear();
+        assertEquals(0, list.size());
+    }
+
+    @Test
+    void testIsEmpty() {
+        List<Integer> list = new LinkedList<>();
+        assertTrue(list.isEmpty());
+    }
 }
