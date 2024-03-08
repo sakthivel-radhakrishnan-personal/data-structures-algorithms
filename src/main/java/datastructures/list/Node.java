@@ -1,12 +1,12 @@
 package datastructures.list;
 
-class Node {
+public class Node {
 
     private Object data;
 
     private Node next;
 
-    Node(Object data) {
+    public Node(Object data) {
         this.data = data;
         this.next = null;
     }
