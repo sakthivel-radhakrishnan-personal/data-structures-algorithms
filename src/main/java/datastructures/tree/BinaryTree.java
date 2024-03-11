@@ -7,4 +7,6 @@ public interface BinaryTree<T> {
     void delete(T element);
 
     boolean search(T element);
+
+    void traverseInorder();
 }
