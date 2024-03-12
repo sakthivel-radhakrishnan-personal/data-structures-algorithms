@@ -2,17 +2,22 @@ package datastructures.tree;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class BinarySearchTreeTest {
+
+    private final int TREE_SIZE = 1_00_000;
 
     @Test
     void testInsert() {
         BinaryTree<Integer> bst = new BinarySearchTree<>();
-        bst.insert(10);
-        bst.insert(5);
-        bst.insert(15);
+        // generate unique random numbers and insert them into the tree
+        for (int i = 1; i <= TREE_SIZE; i++) {
+            bst.insert((int) (Math.random() * TREE_SIZE));
+        }
+        assertTrue(bst.isBST());
     }
 
     @Test
@@ -21,6 +26,8 @@ class BinarySearchTreeTest {
         bst.insert('q');
         bst.insert('a');
         bst.insert('z');
+
+        assertTrue(bst.isBST());
     }
 
     @Test
@@ -29,10 +36,11 @@ class BinarySearchTreeTest {
         bst.insert(10);
         bst.insert(5);
         bst.insert(15);
-        assertTrue(bst.search(10));
-        assertTrue(bst.search(5));
-        assertTrue(bst.search(15));
-        assertFalse(bst.search(20));
+        assertTrue(bst.isBST());
+        assertNotNull(bst.search(10));
+        assertNotNull(bst.search(5));
+        assertNotNull(bst.search(15));
+        assertNull(bst.search(20));
     }
 
     @Test
@@ -41,23 +49,30 @@ class BinarySearchTreeTest {
         bst.insert('q');
         bst.insert('a');
         bst.insert('z');
-        assertTrue(bst.search('q'));
-        assertTrue(bst.search('a'));
-        assertTrue(bst.search('z'));
-        assertFalse(bst.search('x'));
+        assertTrue(bst.isBST());
+        assertNotNull(bst.search('q'));
+        assertNotNull(bst.search('a'));
+        assertNotNull(bst.search('z'));
+        assertNull(bst.search('x'));
     }
 
     @Test
     void testTraverseInorder() {
         BinaryTree<Integer> bst = new BinarySearchTree<>();
-        bst.insert(10);
-        bst.insert(5);
-        bst.insert(15);
-        bst.insert(3);
-        bst.insert(7);
-        bst.insert(12);
-        bst.insert(17);
-        bst.traverseInorder();
+
+        // generate unique random numbers and insert them into the tree
+        for (int i = 1; i <= TREE_SIZE; i++) {
+            bst.insert((int) (Math.random() * TREE_SIZE));
+        }
+
+        assertTrue(bst.isBST());
+
+        List<BinaryTreeNode<Integer>> list = bst.traverseInorder();
+
+        // check if the list is in the ascending order
+        for (int i = 0; i < list.size() - 1; i++) {
+            assertTrue(list.get(i).getData() < list.get(i + 1).getData());
+        }
     }
 
     @Test
@@ -70,6 +85,14 @@ class BinarySearchTreeTest {
         bst.insert('c');
         bst.insert('m');
         bst.insert('r');
-        bst.traverseInorder();
+
+        assertTrue(bst.isBST());
+        List<BinaryTreeNode<Character>> list = bst.traverseInorder();
+
+
+        // check if the list is in the ascending order
+        for (int i = 0; i < list.size() - 1; i++) {
+            assertTrue(list.get(i).getData() < list.get(i + 1).getData());
+        }
     }
 }

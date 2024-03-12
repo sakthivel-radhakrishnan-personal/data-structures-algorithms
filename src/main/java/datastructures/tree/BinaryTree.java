@@ -1,12 +1,17 @@
 package datastructures.tree;
 
+
+import java.util.List;
+
 public interface BinaryTree<T> {
 
     void insert(T data);
 
     void delete(T element);
 
-    boolean search(T element);
+    BinaryTreeNode<T> search(T element);
 
-    void traverseInorder();
+    List<BinaryTreeNode<T>> traverseInorder();
+
+    boolean isBST();
 }

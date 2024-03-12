@@ -1,5 +1,9 @@
 package datastructures.tree;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class BinarySearchTree<T extends Comparable<T>> implements BinaryTree<T> {
 
     private BinaryTreeNode<T> root;
@@ -18,27 +22,50 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinaryTree<T> 
     }
 
     @Override
-    public boolean search(T element) {
+    public BinaryTreeNode<T> search(T element) {
         return searchRecursive(root, element);
     }
 
     @Override
     public void delete(T element) {
+        BinaryTreeNode<T> nodeToBeDeleted = search(element);
 
+        if (isALeafNode(nodeToBeDeleted)) {
+
+        }
     }
 
     @Override
-    public void traverseInorder() {
-        traverseInorderRecursive(root);
+    public List<BinaryTreeNode<T>> traverseInorder() {
+        List<BinaryTreeNode<T>> list = new ArrayList<>();
+        traverseInorderRecursive(root, list);
+        return list;
     }
 
-    private void traverseInorderRecursive(BinaryTreeNode<T> root) {
+    @Override
+    public boolean isBST() {
+        return isBSTUtil(root, null, null);
+    }
+
+    private boolean isBSTUtil(BinaryTreeNode<T> node, T min, T max) {
+        if (node == null) {
+            return true;
+        }
+
+        if ((min != null && node.getData().compareTo(min) <= 0) || (max != null && node.getData().compareTo(max) >= 0)) {
+            return false;
+        }
+
+        return isBSTUtil(node.getLeft(), min, node.getData()) && isBSTUtil(node.getRight(), node.getData(), max);
+    }
+
+    private void traverseInorderRecursive(BinaryTreeNode<T> root, List<BinaryTreeNode<T>> list) {
         if (root == null) {
             return;
         }
-        traverseInorderRecursive(root.getLeft());
-        System.out.print(root.getData() + " ");
-        traverseInorderRecursive(root.getRight());
+        traverseInorderRecursive(root.getLeft(), list);
+        list.add(root);
+        traverseInorderRecursive(root.getRight(), list);
     }
 
     private BinaryTreeNode<T> insertRecursive(BinaryTreeNode<T> root, BinaryTreeNode<T> newNode) {
@@ -49,27 +76,35 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinaryTree<T> 
 
         if (isNodeSmallerThanRoot(root, newNode)) {
             root.setLeft(insertRecursive(root.getLeft(), newNode));
-        } else {
+        } else if (isNodeGreaterThanRoot(root, newNode)) {
             root.setRight(insertRecursive(root.getRight(), newNode));
         }
         return root;
     }
 
-    private boolean searchRecursive(BinaryTreeNode<T> root, T element) {
-        if (root == null) {
-            return false;
+    private BinaryTreeNode<T> searchRecursive(BinaryTreeNode<T> node, T element) {
+        if (node == null) {
+            return null;
         }
 
-        if (root.getData().equals(element)) {
-            return true;
-        } else if (element.compareTo(root.getData()) < 0) {
-            return searchRecursive(root.getLeft(), element);
+        if (node.getData().equals(element)) {
+            return node;
+        } else if (element.compareTo(node.getData()) < 0) {
+            return searchRecursive(node.getLeft(), element);
         } else {
-            return searchRecursive(root.getRight(), element);
+            return searchRecursive(node.getRight(), element);
         }
     }
 
     private boolean isNodeSmallerThanRoot(BinaryTreeNode<T> root, BinaryTreeNode<T> newNode) {
         return newNode.getData().compareTo(root.getData()) < 0;
+    }
+
+    private boolean isNodeGreaterThanRoot(BinaryTreeNode<T> root, BinaryTreeNode<T> newNode) {
+        return newNode.getData().compareTo(root.getData()) > 0;
+    }
+
+    private boolean isALeafNode(BinaryTreeNode<T> node) {
+        return node.getLeft() == null && node.getRight() == null;
     }
 }
