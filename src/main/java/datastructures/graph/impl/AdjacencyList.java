@@ -41,13 +41,12 @@ public class AdjacencyList {
     }
 
     public List<Integer> bfs(Integer startNode) {
+        List<Integer> bfsOrder = new ArrayList<>(numOfNodes);
         boolean[] visited = new boolean[numOfNodes];
         Queue<Integer> queue = new LinkedList<>();
 
-        List<Integer> bfsOrder = new ArrayList<>(numOfNodes);
-
-        visited[startNode] = true;
         queue.add(startNode);
+        visited[startNode] = true;
 
         while (!queue.isEmpty()) {
             Integer currentNode = queue.poll();
@@ -63,23 +62,21 @@ public class AdjacencyList {
     }
 
     public List<Integer> dfs(Integer startNode) {
+        List<Integer> dfsOrder = new ArrayList<>(numOfNodes);
         boolean[] visited = new boolean[numOfNodes];
         Stack<Integer> stack = new Stack<>();
-
-        List<Integer> dfsOrder = new ArrayList<>(numOfNodes);
 
         stack.push(startNode);
 
         while (!stack.isEmpty()) {
-            Integer currentNode = stack.peek();
-            stack.pop();
+            startNode = stack.pop();
 
-            if (!visited[currentNode]) {
-                dfsOrder.add(currentNode);
-                visited[currentNode] = true;
+            if (!visited[startNode]) {
+                dfsOrder.add(startNode);
+                visited[startNode] = true;
             }
 
-            for (Integer neighbor : graph.get(currentNode)) {
+            for (Integer neighbor : graph.get(startNode)) {
                 if (!visited[neighbor]) {
                     stack.push(neighbor);
                 }

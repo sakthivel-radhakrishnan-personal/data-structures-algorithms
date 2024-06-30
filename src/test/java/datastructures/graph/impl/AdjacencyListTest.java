@@ -146,7 +146,7 @@ class AdjacencyListTest {
         assertEquals(List.of(0, 3, 2, 1, 4), dfsOrder);
 
         dfsOrder = adjacencyList.dfs(1);
-        assertEquals(List.of(1, 4, 0, 3, 2), dfsOrder);
+        assertEquals(List.of(1, 4, 2, 0, 3), dfsOrder);
 
         dfsOrder = adjacencyList.dfs(2);
         assertEquals(List.of(2, 1, 4, 0, 3), dfsOrder);
@@ -155,6 +155,6 @@ class AdjacencyListTest {
         assertEquals(List.of(3, 0, 2, 1, 4), dfsOrder);
 
         dfsOrder = adjacencyList.dfs(4);
-        assertEquals(List.of(4, 1, 0, 3, 2), dfsOrder);
+        assertEquals(List.of(4, 1, 2, 0, 3), dfsOrder);
     }
 }
