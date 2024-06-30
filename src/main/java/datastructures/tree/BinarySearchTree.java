@@ -28,10 +28,28 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinaryTree<T> 
 
     @Override
     public void delete(T element) {
+
+
         BinaryTreeNode<T> nodeToBeDeleted = search(element);
 
         if (isALeafNode(nodeToBeDeleted)) {
 
+        }
+    }
+
+    private void deleteRecursive(BinaryTreeNode<T> root, T element) {
+        if (root == null) {
+            return;
+        }
+
+        if (root.getLeft() != null && root.getLeft().getData().equals(element)) {
+
+        }
+
+        if (root.getData().compareTo(element) < 0) {
+            // traverse right
+        } else if (root.getData().compareTo(element) > 0) {
+            // traverse left
         }
     }
 

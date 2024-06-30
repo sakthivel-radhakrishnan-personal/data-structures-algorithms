@@ -12,7 +12,7 @@ public interface List<T> {
 
     void remove(T element) throws EmptyListException;
 
-    Object get(int index);
+    T get(int index);
 
     boolean contains(T o);
 

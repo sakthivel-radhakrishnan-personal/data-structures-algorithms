@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class ArrayList<T> implements List<T> {
-    private Object[] list;
+    private T[] list;
 
     private int size;
 
@@ -18,8 +18,9 @@ public class ArrayList<T> implements List<T> {
         this(DEFAULT_CAPACITY);
     }
 
+    @SuppressWarnings("unchecked")
     public ArrayList(int initialCapacity) {
-        list = new Object[initialCapacity];
+        list = (T[]) new Object[initialCapacity];
         size = 0;
     }
 
@@ -66,7 +67,7 @@ public class ArrayList<T> implements List<T> {
     }
 
     @Override
-    public Object get(int index) throws ArrayIndexOutOfBoundsException {
+    public T get(int index) throws ArrayIndexOutOfBoundsException {
         validateIndexRange(index);
         return list[index];
     }
@@ -87,8 +88,9 @@ public class ArrayList<T> implements List<T> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void clear() {
-        list = new Object[DEFAULT_CAPACITY];
+        list = (T[]) new Object[DEFAULT_CAPACITY];
         size = 0;
     }
 

@@ -113,7 +113,8 @@ public class LinkedList<T> implements List<T> {
     }
 
     @Override
-    public Object get(int index) {
+    @SuppressWarnings("unchecked")
+    public T get(int index) {
         if (head == null) {
             throw new EmptyListException();
         }
@@ -130,7 +131,7 @@ public class LinkedList<T> implements List<T> {
         }
 
         if (Objects.nonNull(current) && Objects.nonNull(current.getNext())) {
-            return current.getNext().getData();
+            return (T) current.getNext().getData();
         }
         return null;
     }
