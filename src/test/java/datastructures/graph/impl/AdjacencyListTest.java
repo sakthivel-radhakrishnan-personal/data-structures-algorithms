@@ -87,17 +87,10 @@ class AdjacencyListTest {
         adjacencyList.addEdge(1, 4);
         adjacencyList.addEdge(2, 4);
 
-        List<Integer> bfsOrder = adjacencyList.bfs(0);
-        assertEquals(List.of(0, 1, 2, 3, 4), bfsOrder);
-
-        bfsOrder = adjacencyList.bfs(1);
-        assertEquals(List.of(1, 0, 3, 4, 2), bfsOrder);
-
-        bfsOrder = adjacencyList.bfs(2);
-        assertEquals(List.of(2, 0, 4, 1, 3), bfsOrder);
-
-        bfsOrder = adjacencyList.bfs(3);
-        assertEquals(List.of(3, 1, 0, 4, 2), bfsOrder);
+        assertEquals(List.of(0, 1, 2, 3, 4), adjacencyList.bfs(0));
+        assertEquals(List.of(1, 0, 3, 4, 2), adjacencyList.bfs(1));
+        assertEquals(List.of(2, 0, 4, 1, 3), adjacencyList.bfs(2));
+        assertEquals(List.of(3, 1, 0, 4, 2), adjacencyList.bfs(3));
     }
 
     @Test
@@ -142,19 +135,10 @@ class AdjacencyListTest {
         adjacencyList.addEdge(0, 3);
         adjacencyList.addEdge(1, 4);
 
-        List<Integer> dfsOrder = adjacencyList.dfs(0);
-        assertEquals(List.of(0, 3, 2, 1, 4), dfsOrder);
-
-        dfsOrder = adjacencyList.dfs(1);
-        assertEquals(List.of(1, 4, 2, 0, 3), dfsOrder);
-
-        dfsOrder = adjacencyList.dfs(2);
-        assertEquals(List.of(2, 1, 4, 0, 3), dfsOrder);
-
-        dfsOrder = adjacencyList.dfs(3);
-        assertEquals(List.of(3, 0, 2, 1, 4), dfsOrder);
-
-        dfsOrder = adjacencyList.dfs(4);
-        assertEquals(List.of(4, 1, 2, 0, 3), dfsOrder);
+        assertEquals(List.of(0, 3, 2, 1, 4), adjacencyList.dfs(0));
+        assertEquals(List.of(1, 4, 2, 0, 3), adjacencyList.dfs(1));
+        assertEquals(List.of(2, 1, 4, 0, 3), adjacencyList.dfs(2));
+        assertEquals(List.of(3, 0, 2, 1, 4), adjacencyList.dfs(3));
+        assertEquals(List.of(4, 1, 2, 0, 3), adjacencyList.dfs(4));
     }
 }

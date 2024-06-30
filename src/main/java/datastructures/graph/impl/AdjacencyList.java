@@ -65,18 +65,19 @@ public class AdjacencyList {
         List<Integer> dfsOrder = new ArrayList<>(numOfNodes);
         boolean[] visited = new boolean[numOfNodes];
         Stack<Integer> stack = new Stack<>();
+        Integer currentNode = startNode;
 
-        stack.push(startNode);
+        stack.push(currentNode);
 
         while (!stack.isEmpty()) {
-            startNode = stack.pop();
+            currentNode = stack.pop();
 
-            if (!visited[startNode]) {
-                dfsOrder.add(startNode);
-                visited[startNode] = true;
+            if (!visited[currentNode]) {
+                dfsOrder.add(currentNode);
+                visited[currentNode] = true;
             }
 
-            for (Integer neighbor : graph.get(startNode)) {
+            for (Integer neighbor : graph.get(currentNode)) {
                 if (!visited[neighbor]) {
                     stack.push(neighbor);
                 }
