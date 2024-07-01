@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AdjacencyListTest {
     @Test
     void testAddEdge() {
-        AdjacencyList adjacencyList = new AdjacencyList(5);
+        AdjacencyList adjacencyList = new AdjacencyList(5, true);
 
         adjacencyList.addEdge(0, 1);
         adjacencyList.addEdge(1, 2);
@@ -25,7 +25,7 @@ class AdjacencyListTest {
 
     @Test
     void testRemoveEdge() {
-        AdjacencyList adjacencyList = new AdjacencyList(5);
+        AdjacencyList adjacencyList = new AdjacencyList(5, true);
 
         adjacencyList.addEdge(0, 1);
         adjacencyList.addEdge(1, 2);
@@ -49,7 +49,7 @@ class AdjacencyListTest {
 
     @Test
     void testIsEdge() {
-        AdjacencyList adjacencyList = new AdjacencyList(5);
+        AdjacencyList adjacencyList = new AdjacencyList(5, true);
 
         adjacencyList.addEdge(1, 3);
         adjacencyList.addEdge(2, 4);
@@ -67,7 +67,7 @@ class AdjacencyListTest {
 
     @Test
     void testExceptionForNegativeEdge() {
-        AdjacencyList adjacencyList = new AdjacencyList(5);
+        AdjacencyList adjacencyList = new AdjacencyList(5, true);
 
         assertThrows(RuntimeException.class, () -> adjacencyList.addEdge(-1, 3));
         assertThrows(RuntimeException.class, () -> adjacencyList.addEdge(1, -3));
@@ -79,7 +79,7 @@ class AdjacencyListTest {
 
     @Test
     void testBfs() {
-        AdjacencyList adjacencyList = new AdjacencyList(5);
+        AdjacencyList adjacencyList = new AdjacencyList(5, true);
 
         adjacencyList.addEdge(0, 1);
         adjacencyList.addEdge(0, 2);
@@ -95,7 +95,7 @@ class AdjacencyListTest {
 
     @Test
     void testBfsForDisconnectedGraph() {
-        AdjacencyList adjacencyList = new AdjacencyList(5);
+        AdjacencyList adjacencyList = new AdjacencyList(5, true);
 
         adjacencyList.addEdge(0, 1);
         adjacencyList.addEdge(0, 2);
@@ -111,7 +111,7 @@ class AdjacencyListTest {
 
     @Test
     void testBfsForEmptyGraph() {
-        AdjacencyList adjacencyList = new AdjacencyList(5);
+        AdjacencyList adjacencyList = new AdjacencyList(5, true);
 
         List<Integer> bfsOrder = adjacencyList.bfs(0);
         assertEquals(List.of(0), bfsOrder);
@@ -119,7 +119,7 @@ class AdjacencyListTest {
 
     @Test
     void testBfsForSingleNodeGraph() {
-        AdjacencyList adjacencyList = new AdjacencyList(1);
+        AdjacencyList adjacencyList = new AdjacencyList(1, true);
 
         List<Integer> bfsOrder = adjacencyList.bfs(0);
         assertEquals(List.of(0), bfsOrder);
@@ -127,7 +127,7 @@ class AdjacencyListTest {
 
     @Test
     void testDfs() {
-        AdjacencyList adjacencyList = new AdjacencyList(5);
+        AdjacencyList adjacencyList = new AdjacencyList(5, true);
 
         adjacencyList.addEdge(1, 0);
         adjacencyList.addEdge(0, 2);

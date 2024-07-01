@@ -8,9 +8,12 @@ public class AdjacencyList {
 
     private final int numOfNodes;
 
-    public AdjacencyList(Integer numOfNodes) {
+    private final boolean isUnDirected;
+
+    public AdjacencyList(Integer numOfNodes, boolean isUnDirected) {
         this.graph = new ArrayList<>(numOfNodes);
         this.numOfNodes = numOfNodes;
+        this.isUnDirected = isUnDirected;
 
         for (int i = 0; i < numOfNodes; i++) {
             graph.add(new LinkedList<>());
@@ -22,7 +25,9 @@ public class AdjacencyList {
             throw new RuntimeException("Negative edge is not allowed");
         }
         graph.get(src).add(dest);
-        graph.get(dest).add(src); // For undirected graph
+        if (isUnDirected) {
+            graph.get(dest).add(src); // For undirected graph
+        }
     }
 
     public void removeEdge(Integer src, Integer dest) {
@@ -30,7 +35,9 @@ public class AdjacencyList {
             throw new RuntimeException("Negative edge is not allowed");
         }
         graph.get(src).remove(dest);
-        graph.get(dest).remove(src); // For undirected graph
+        if (isUnDirected) {
+            graph.get(dest).remove(src); // For undirected graph
+        }
     }
 
     public boolean isEdge(Integer src, Integer dest) {
