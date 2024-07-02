@@ -6,16 +6,16 @@ public class AdjacencyList {
 
     private final List<List<Integer>> graph;
 
-    private final int numOfNodes;
+    private final int numOfVertices;
 
     private final boolean isUnDirected;
 
-    public AdjacencyList(Integer numOfNodes, boolean isUnDirected) {
-        this.graph = new ArrayList<>(numOfNodes);
-        this.numOfNodes = numOfNodes;
+    public AdjacencyList(Integer numOfVertices, boolean isUnDirected) {
+        this.graph = new ArrayList<>(numOfVertices);
+        this.numOfVertices = numOfVertices;
         this.isUnDirected = isUnDirected;
 
-        for (int i = 0; i < numOfNodes; i++) {
+        for (int i = 0; i < numOfVertices; i++) {
             graph.add(new LinkedList<>());
         }
     }
@@ -30,7 +30,7 @@ public class AdjacencyList {
         }
     }
 
-    public void removeEdge(Integer src, Integer dest) {
+    void removeEdge(Integer src, Integer dest) {
         if (src < 0 || dest < 0) {
             throw new RuntimeException("Negative edge is not allowed");
         }
@@ -40,16 +40,16 @@ public class AdjacencyList {
         }
     }
 
-    public boolean isEdge(Integer src, Integer dest) {
+    boolean isEdge(Integer src, Integer dest) {
         if (src < 0 || dest < 0) {
             throw new RuntimeException("Negative edge is not allowed");
         }
         return graph.get(src).contains(dest);
     }
 
-    public List<Integer> bfs(Integer startNode) {
-        List<Integer> bfsOrder = new ArrayList<>(numOfNodes);
-        boolean[] visited = new boolean[numOfNodes];
+    List<Integer> bfs(Integer startNode) {
+        List<Integer> bfsOrder = new ArrayList<>(numOfVertices);
+        boolean[] visited = new boolean[numOfVertices];
         Queue<Integer> queue = new LinkedList<>();
 
         queue.add(startNode);
@@ -68,9 +68,9 @@ public class AdjacencyList {
         return bfsOrder;
     }
 
-    public List<Integer> dfs(Integer startNode) {
-        List<Integer> dfsOrder = new ArrayList<>(numOfNodes);
-        boolean[] visited = new boolean[numOfNodes];
+    List<Integer> dfs(Integer startNode) {
+        List<Integer> dfsOrder = new ArrayList<>(numOfVertices);
+        boolean[] visited = new boolean[numOfVertices];
         Stack<Integer> stack = new Stack<>();
         Integer currentNode = startNode;
 
@@ -91,5 +91,13 @@ public class AdjacencyList {
             }
         }
         return dfsOrder;
+    }
+
+    public List<List<Integer>> getGraph() {
+        return graph;
+    }
+
+    public int getNumOfVertices() {
+        return numOfVertices;
     }
 }
