@@ -5,10 +5,10 @@ import datastructures.graph.impl.Edge;
 
 import java.util.Stack;
 
-public class DetectCycleInADirectedGraph {
+public class DetectCycleInUnDirectedGraph {
 
-    static boolean isCycleExist(AdjacencyList directedGraph, int startingVertex) {
-        int numOfVertices = directedGraph.getNumOfVertices();
+    static boolean isCycleExist(AdjacencyList undirectedGraph, int startingVertex) {
+        int numOfVertices = undirectedGraph.getNumOfVertices();
         boolean[] visited = new boolean[numOfVertices];
         Stack<Integer> stack = new Stack<>();
         boolean visitedAllNeighbors;
@@ -24,7 +24,7 @@ public class DetectCycleInADirectedGraph {
                 visited[currentVertex] = true;
             }
 
-            for (Edge neighbor : directedGraph.getGraph().get(currentVertex)) {
+            for (Edge neighbor : undirectedGraph.getGraph().get(currentVertex)) {
                 if (!visited[neighbor.to]) {
                     stack.push(neighbor.to);
                     visitedAllNeighbors = true;

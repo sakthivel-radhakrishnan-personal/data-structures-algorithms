@@ -2,6 +2,7 @@ package datastructures.graph.impl;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -140,5 +141,42 @@ class AdjacencyListTest {
         assertEquals(List.of(2, 1, 4, 0, 3), adjacencyList.dfs(2));
         assertEquals(List.of(3, 0, 2, 1, 4), adjacencyList.dfs(3));
         assertEquals(List.of(4, 1, 2, 0, 3), adjacencyList.dfs(4));
+    }
+
+    @Test
+    void testDfsRecursive() {
+        AdjacencyList adjacencyList = new AdjacencyList(5, false);
+
+        adjacencyList.addEdge(0, 1);
+        adjacencyList.addEdge(0, 2);
+        adjacencyList.addEdge(1, 3);
+        adjacencyList.addEdge(2, 3);
+        adjacencyList.addEdge(2, 4);
+        adjacencyList.addEdge(4, 3);
+
+        List<Integer> result = new ArrayList<>(5);
+        boolean[] visited = new boolean[5];
+        adjacencyList.dfsRecursive(0, visited, result, adjacencyList.getGraph());
+        assertEquals(List.of(0, 1, 3, 2, 4), result);
+
+        result = new ArrayList<>(5);
+        visited = new boolean[5];
+        adjacencyList.dfsRecursive(1, visited, result, adjacencyList.getGraph());
+        assertEquals(List.of(1, 3), result);
+
+        result = new ArrayList<>(5);
+        visited = new boolean[5];
+        adjacencyList.dfsRecursive(2, visited, result, adjacencyList.getGraph());
+        assertEquals(List.of(2, 3, 4), result);
+
+        result = new ArrayList<>(5);
+        visited = new boolean[5];
+        adjacencyList.dfsRecursive(3, visited, result, adjacencyList.getGraph());
+        assertEquals(List.of(3), result);
+
+        result = new ArrayList<>(5);
+        visited = new boolean[5];
+        adjacencyList.dfsRecursive(4, visited, result, adjacencyList.getGraph());
+        assertEquals(List.of(4, 3), result);
     }
 }

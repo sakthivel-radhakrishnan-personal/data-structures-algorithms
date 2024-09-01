@@ -3,18 +3,17 @@ package datastructures.graph.problem;
 import datastructures.graph.impl.AdjacencyList;
 import org.junit.jupiter.api.Test;
 
-import java.util.Map;
-
 import static datastructures.graph.problem.DetectCycleInADirectedGraph.isCycleExist;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class DetectCycleInADirectedGraphTest {
+class DetectCycleInUnDirectedGraphTest {
 
     private final int ITERATIONS = 1_00_000;
 
     @Test
     void testIsCycleExist() {
-        AdjacencyList directedGraph = new AdjacencyList(4, false);
+        AdjacencyList directedGraph = new AdjacencyList(4, true);
 
         directedGraph.addEdge(0, 1);
         directedGraph.addEdge(0, 2);
@@ -28,7 +27,20 @@ class DetectCycleInADirectedGraphTest {
         }
 
 
-        AdjacencyList directedGraph4 = new AdjacencyList(6, false);
+        AdjacencyList directedGraph1 = new AdjacencyList(5, true);
+
+        directedGraph1.addEdge(1, 0);
+        directedGraph1.addEdge(0, 2);
+        directedGraph1.addEdge(2, 1);
+        directedGraph1.addEdge(0, 3);
+        directedGraph1.addEdge(3, 4);
+
+        for (int i = 1; i <= ITERATIONS; i++) {
+            assertTrue(isCycleExist(directedGraph1, (int) (Math.random() * 5)));
+        }
+
+
+        AdjacencyList directedGraph4 = new AdjacencyList(6, true);
         directedGraph4.addEdge(0, 1);
         directedGraph4.addEdge(0, 2);
         directedGraph4.addEdge(1, 3);
@@ -46,7 +58,18 @@ class DetectCycleInADirectedGraphTest {
     @Test
     void testCycleNotExists() {
 
-        AdjacencyList directedGraph2 = new AdjacencyList(4, false);
+        AdjacencyList directedGraph1 = new AdjacencyList(4, true);
+
+        directedGraph1.addEdge(0, 1);
+        directedGraph1.addEdge(1, 2);
+        directedGraph1.addEdge(2, 3);
+
+        for (int i = 1; i <= ITERATIONS; i++) {
+            assertFalse(isCycleExist(directedGraph1, (int) (Math.random() * 2)));
+        }
+
+
+        AdjacencyList directedGraph2 = new AdjacencyList(4, true);
 
         directedGraph2.addEdge(0, 1);
         directedGraph2.addEdge(0, 2);
@@ -57,7 +80,7 @@ class DetectCycleInADirectedGraphTest {
             assertFalse(isCycleExist(directedGraph2, (int) (Math.random() * 4)));
         }
 
-        AdjacencyList directedGraph3 = new AdjacencyList(6, false);
+        AdjacencyList directedGraph3 = new AdjacencyList(6, true);
         directedGraph3.addEdge(0, 1);
         directedGraph3.addEdge(0, 2);
         directedGraph3.addEdge(1, 3);
@@ -69,7 +92,7 @@ class DetectCycleInADirectedGraphTest {
             assertFalse(isCycleExist(directedGraph3, (int) (Math.random() * 6)));
         }
 
-        AdjacencyList directedGraph5 = new AdjacencyList(6, false);
+        AdjacencyList directedGraph5 = new AdjacencyList(6, true);
         directedGraph5.addEdge(0, 1);
         directedGraph5.addEdge(0, 2);
         directedGraph5.addEdge(1, 3);
@@ -80,13 +103,5 @@ class DetectCycleInADirectedGraphTest {
         for (int i = 1; i <= ITERATIONS; i++) {
             assertFalse(isCycleExist(directedGraph5, (int) (Math.random() * 6)));
         }
-    }
-
-    @Test
-    void compareTwoMaps() {
-        Map<String, String> map1 = Map.of("a", "b", "b", "d");
-        Map<String, String> map2 = Map.of("a", "d", "d", "b");
-
-        assertEquals(map1.keySet(), map2.keySet());
     }
 }
