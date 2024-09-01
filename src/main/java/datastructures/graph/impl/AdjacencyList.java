@@ -135,10 +135,6 @@ public class AdjacencyList {
     }
 
     public void dfsRecursive(Integer at, boolean[] visited, List<Integer> result, Map<Object, List<Edge>> graph) {
-        if (visited[at]) {
-            return;
-        }
-
         visited[at] = true;
         result.add(at);
 
